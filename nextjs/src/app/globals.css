@@ -12,15 +12,10 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.ds-button {
+  @apply p-2 text-white hover:bg-neutral-800 bg-neutral-900 cursor-pointer rounded;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.ds-button.active {
+  @apply bg-blue-500;
 }
