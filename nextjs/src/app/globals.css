@@ -19,3 +19,7 @@
 .ds-button.active {
   @apply bg-blue-500;
 }
+
+.ds-button.enable {
+  @apply bg-green-500
+}

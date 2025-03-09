@@ -12,6 +12,6 @@ export const createInteractionSlice: StateCreator<
   [],
   InteractionSlice
 > = (set) => ({
-  interactionMode: "remove-cube",
+  interactionMode: "nothing",
   setInteractionMode: (mode) => set({ interactionMode: mode }),
 });

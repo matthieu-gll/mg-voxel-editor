@@ -8,7 +8,7 @@ import { useGlobalStore } from "@/stores/useGlobalStore";
 
 export const AddCubePointer = () => {
   const interactionMode = useGlobalStore((state) => state.interactionMode);
-
+  const modelAddComposite = useGlobalStore((state) => state.modelAddComposite);
   const meshBuildingPlaneRef = useRef<Mesh>(null);
   const meshCubeHelperRef = useRef<Mesh>(null);
 
@@ -47,13 +47,27 @@ export const AddCubePointer = () => {
     meshCubeHelperRef.current.position.copy(cubePosition);
   });
 
+  const handleOnClick = () => {
+    if (!meshCubeHelperRef.current) return;
+    const position: [number, number, number] = [
+      meshCubeHelperRef.current.position.x,
+      meshCubeHelperRef.current.position.y,
+      meshCubeHelperRef.current.position.z,
+    ];
+    modelAddComposite({ color: "blue", position });
+  };
+
   return (
     <>
       {isAddCubeMode && (
         <>
-          <mesh ref={meshCubeHelperRef} position={[0, 0, 0]}>
+          <mesh
+            ref={meshCubeHelperRef}
+            position={[0, 0, 0]}
+            onClick={handleOnClick}
+          >
             <boxGeometry args={[CUBE_SIZE, CUBE_SIZE, CUBE_SIZE]} />
-            <meshBasicMaterial color="green" opacity={0.4} transparent />
+            <meshBasicMaterial color="blue" opacity={0.4} transparent />
           </mesh>
           <mesh ref={meshBuildingPlaneRef} rotation={[-Math.PI / 2, 0, 0]}>
             <boxGeometry
@@ -63,9 +77,6 @@ export const AddCubePointer = () => {
           </mesh>
         </>
       )}
-      <mesh rotation={[0, 0, 0]}>
-        <gridHelper args={[CUBE_SIZE * SCALE_GRID, SCALE_GRID]} />
-      </mesh>
     </>
   );
 };
